@@ -14,7 +14,9 @@ function bes.install ()
     local path=${3:-/usr/local/bin}
     local done=1
     bes.echo.title "Installing $app ${Coff}in" "$path"
-
+    if [ -z "$app" ] || [ -s "$url" ]; then
+        bes.echo.error "in bes.install : \$app '$app' & \$url '$url' are required" 1
+    fi
     if [ -f "./$app" ]; then
         rm ./$app
     fi
