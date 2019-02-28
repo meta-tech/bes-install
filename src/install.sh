@@ -12,6 +12,7 @@ function bes.install ()
     local  app=${1}
     local  url=${2}
     local path=${3:-/usr/local/bin}
+    local inst=${4:-}
     local done=1
     echo.title "Installing $app ${Coff}in" "$path"
     if [ -z "$app" ] || [ -s "$url" ]; then
@@ -30,8 +31,13 @@ function bes.install ()
         else
             echo.error "install directory do not exists : ${Cspe}$path"
         fi
+        if [ ! -z "$inst" ]; then
+            if bes.exists "$inst"; then
+                $inst
+            fi
+        fi
     else 
-        echo.error "can not download latest version of app $app. please check url : $url"        
+        echo.error "can not download latest version of app $app. please check url : $url"
     fi
     echo.rs $done
 }
