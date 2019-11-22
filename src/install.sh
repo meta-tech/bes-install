@@ -13,9 +13,9 @@ function bes.install ()
     local  url=${2}
     local path=${3:-/usr/local/bin}
     local done=1
-    bes.echo.title "Installing $app ${Coff}in" "$path"
+    echo.title "Installing $app ${Coff}in" "$path"
     if [ -z "$app" ] || [ -s "$url" ]; then
-        bes.echo.error "in bes.install : \$app '$app' & \$url '$url' are required" 1
+        echo.error "in bes.install : \$app '$app' & \$url '$url' are required" 1
     fi
     if [ -f "./$app" ]; then
         rm ./$app
@@ -26,12 +26,12 @@ function bes.install ()
         if [ -d $path ]; then
             sudo mv ./$app $path/$app
             local done=$?
-            bes.echo.state $done
+            echo.state $done
         else
-            bes.echo.error "install directory do not exists : ${Cspe}$path"
+            echo.error "install directory do not exists : ${Cspe}$path"
         fi
     else 
-        bes.echo.error "can not download latest version of app $app. please check url : $url"        
+        echo.error "can not download latest version of app $app. please check url : $url"        
     fi
-    bes.echo.rs $done
+    echo.rs $done
 }
